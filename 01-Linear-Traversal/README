@@ -1,1 +1,24 @@
 
+# 📂 Pattern 01: Linear Traversal
+
+Linear Traversal is the most fundamental pattern where we visit every element of an array exactly once. It has a **Time Complexity of O(n)**.
+
+## 🧠 Key Logic Patterns Covered:
+
+1.  **The Searcher:** Finding elements, indexes, or checking existence.
+2.  **The Accumulator:** Gathering values into a single result (e.g., Sum, String concat).
+3.  **The Transformer:** Creating a new modified array (e.g., Square of numbers).
+4.  **The Counter:** Counting occurrences based on conditions (e.g., Even/Odd count).
+5.  **Pointer/Step:** Changing how we move through the array (e.g., Alternate elements, Reverse).
+
+## 🚀 Problems Solved (23):
+- Find Max/Min
+- Manual Index Finder
+- Shopping Cart Total (Object Accumulator)
+- Second Largest Element
+- In-place Array Reversal
+- Is Sorted Check
+- ... and 17 more!
+
+## 💡 Key Learning:
+Always use `arr.length - 1` when looking ahead to the next element (`i + 1`) to avoid `undefined` errors.
