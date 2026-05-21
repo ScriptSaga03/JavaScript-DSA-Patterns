@@ -1,0 +1,189 @@
+console.log('Logic Building');
+
+
+// Industry Context:
+// Tum ek apparel website ka Inventory Management Dashboard bana rahe ho. Tumhare paas ek array hai jismein alag-alag clothes ka stock count store hai (jaise [45, 12, 0, 89, 4, 0]). Management chahti hai ki jaise hi inventory mein pehla aisa item mile jiska stock 0 (Out of stock) ho chuka hai, tum turant us item ka index return kar do taaki vendor ko auto-alert chala jaye.
+
+
+let inventory = [12, 5, 8, 0, 14, 0];
+function hasStock(arr,target){
+  for(let i = 0; i < arr.length; i++ ){
+    if(arr[i] === target){
+      return i;
+    }
+  }
+  return -1
+};
+console.log(hasStock(inventory, 0));
+
+// modern
+function stockFiltered(arr){
+    return arr.filter(i => i === 0); 
+}
+
+// Tarika A: Direct console.log mein daal do
+console.log("Filtered Output:", stockFiltered(inventory));
+
+
+
+// Problem 2
+function totalAmount(arr){
+  let total = 0;
+  for(let i = 0; i < arr.length ; i++){
+   total += arr[i]
+  }
+  return {
+    totalBill: total,
+    isFreeShipping : total > 500,
+    
+  };
+  
+}
+
+console.log(totalAmount([120, 80, 250, 90, 110]));
+
+function discountTotal (arr){
+  return arr.reduce((acc, curr) =>{
+    acc.totalAmount += curr;
+    acc.isFreeShipping = acc.totalAmount > 500;
+
+    return acc;
+    
+  }, {totalAmount:0, isFreeShipping: false});
+}
+console.log(discountTotal([120, 110]));
+console.log(discountTotal([120, 80, 250, 90, 110]));
+
+
+
+// Problem 3 
+
+function getPremiumCustomer(arr){
+  let filteredArray = [];
+  for(let i = 0 ; i < arr.length; i++){
+    if(arr[i] > 5000) filteredArray.push(arr[i])
+  }
+  return {
+    premiumCustomer :filteredArray,
+  };
+};
+
+
+console.log(getPremiumCustomer([1200, 6000, 4500, 9500, 300, 5000]));
+
+
+// problem 4
+function gstCalculator(arr){
+  let newArray  = [];
+  for(let i = 0; i < arr.length ; i ++){
+    newArray.push(arr[i] * 1.18);
+  }
+  return newArray
+}
+
+console.log(gstCalculator([100, 500, 1000]));
+
+
+// Problem 5
+// Website analytics ka data hai. Har ghante website par kitne users active the, uska data hai. Tumhe poore din ka Maximum Active Users dhoodhna hai aur yeh batana hai ki woh kis ghante (index) par aaya.
+
+function getAvtiveUser(arr){
+  let max = arr[0];
+  let userIndex = 0
+   for(let i = 0 ; i < arr.length; i ++){
+     if(arr[i] > max) {
+       max = arr[i] ;
+     userIndex = i
+    } 
+   };
+  return {
+    maxActiveUser : max,
+    userPosition:userIndex
+    }
+}
+
+console.log(getAvtiveUser([120, 450, 900, 850, 300]));
+
+
+
+// Problem 6
+/*
+Challenge 6: The Broken Price Alert (Variant: Data Validator)
+Industry Context: Database se kapdon ke prices ka array aaya hai. Kabhi-kabhi technical error ki wajah se prices minus (-ve) mein chale jaate hain. Tumhe ek aisa system banana hai jo array ko check kare:
+*/
+
+function brokenPriceAlert(arr){
+    for(let i = 0 ; i < arr.length; i ++){
+      if(arr[i] < 0) return `Alert :Invalid Price Found at index: ${i}`;
+    }
+  return 'Alert: All price are valid';
+}
+console.log(brokenPriceAlert([100, 200, 300]));
+console.log(brokenPriceAlert([250, 400, -50, 800]));
+
+
+// Problem 7
+/*
+Industry Context: E-commerce apparel shop par ek offer chal raha hai: Cart mein jitne bhi kapde hain, unmein se sirf unhi kapdon ka total bill banao jinki price 300 se zyada hai. Jo kapde 300 ya usse kam ke hain, unhe offers ke tehat free/skip kar do!
+
+Input: [500, 150, 1200, 300, 450]
+
+Expected Output: 2150 (Kyunki 500 + 1200 + 450 = 2150, aur 150 aur 300 ko skip kar diya gaya)
+
+Constraint: Pure for-loop aur if condition ka use karo accumulator ke sath.
+*/
+
+
+function genTotalBill(arr){
+  let totalBill = 0;
+
+  for(let i = 0 ; i < arr.length; i++){
+    if(arr[i] > 300) totalBill+=arr[i];
+  }
+
+  return {
+    finalAmount: totalBill,
+  }
+}
+
+console.log(genTotalBill([500, 150, 1200, 300, 450]));
+
+// modern syntax
+  const totalBill = [500, 150, 1200, 300, 450].reduce((total, price) => {
+    if(price > 300) total += price;
+    return total;
+    
+  },0);
+
+
+
+console.log(totalBill)
+
+// Challenge 8: Alternate Day Sales Tracker (Index-Based Traversal)
+/*Industry Context: Marketing team check karna chahti hai ki alternate days (ek din chhodkar ek din, jaise Day 0, Day 2, Day 4...) par total kitni sales ho rahi hai, taaki woh specific pattern samajh sakein. Tumhe loop ko ek-ek karke badhane ke bajaye alternate steps par chalana hai.
+
+Input: [10, 20, 30, 40, 50, 60]
+
+Expected Output: 90 (Kyunki index 0, 2, aur 4 ka sum: 10 + 30 + 50 = 90)
+
+Hint: Loop ke step increment i++ par dhyan do, wahan kuch badalna padega!
+*/
+
+function alternateDaySalesTracker(arr){
+  let total = 0;
+  for(let i =0; i < arr.length; i+=2){
+    total += arr[i]
+  }
+  return total
+}
+console.log(alternateDaySalesTracker([10, 20, 30, 40, 50, 60]))
+
+// challenge 9: Inventory Price Doubler - In Place
+function invertoryDoubler(arr){
+  for(let i = 0 ; i <arr.length; i++){
+    arr[i] = arr[i] *2
+  }
+  return arr;
+}
+
+console.log(invertoryDoubler([100, 200, 300]));
