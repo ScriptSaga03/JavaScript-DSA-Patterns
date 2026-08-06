@@ -39,3 +39,35 @@ ind     | elem    |     operation       |   condition    |    acti
 
 */
 
+
+
+
+let chars = ["a", "b", "c", "a", "b", "d"];
+
+function firstNonRepeatingChar(str) {
+    let freqMap = {};
+
+    // Pass 1: Frequency map ready karo
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        if (freqMap[char]) {
+            freqMap[char]++;
+        } else {
+            freqMap[char] = 1;
+        }
+    }
+
+    // Pass 2: Original order me check karo ki kiska count exact 1 hai
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        if (freqMap[char] === 1) {
+            return char; // Pehla non-repeating milte hi return kar do ("c")
+        }
+    }
+
+    return null; // Agar koi non-repeating character na mile
+}
+
+console.log('first non repeating char :', firstNonRepeatingChar(chars));
+// Output: "c"
+
