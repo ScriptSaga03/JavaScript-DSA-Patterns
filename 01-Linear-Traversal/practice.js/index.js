@@ -25,4 +25,37 @@ function orderSummary (arr){
     totalValidOrders
   }
 }
-console.log('Order Summary :', orderSummary(orders))
+console.log('Order Summary :', orderSummary(orders));
+
+
+// Problems 2 
+
+
+const stockItems = ["laptop", "phone", "tablet", "phone", "laptop", "laptop", "watch", "phone"];
+function getInventoryAnalytics(arr){
+    let counter = {};
+    let maxCount = 0;
+    let mostFrequentItem = "";
+    let uniqueItemCount = 0;
+    for(let i = 0 ; i < arr.length; i++){
+
+        let item = arr[i];
+        if(counter[item]){
+            counter[item]++
+        }else {
+            counter[item] = 1;
+            uniqueItemCount++
+        }
+        if(counter[item] > maxCount){
+            maxCount = counter[item];
+            mostFrequentItem = item
+        }
+
+    }
+    return {
+        itemCounts: counter, 
+        mostFrequentItem,
+        uniqueItemCount
+    }
+}
+console.log('Inventory Analytics :', getInventoryAnalytics(stockItems))
